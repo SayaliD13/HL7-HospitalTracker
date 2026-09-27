@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee" version="4.0">
+
+    <!-- this file connects each URL the frontend calls to its Java file -->
+
+    <servlet>
+        <servlet-name>Search</servlet-name>
+        <servlet-class>Search</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Search</servlet-name>
+        <url-pattern>/search</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>StaffLogin</servlet-name>
+        <servlet-class>StaffLogin</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>StaffLogin</servlet-name>
+        <url-pattern>/staffLogin</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AddPatient</servlet-name>
+        <servlet-class>AddPatient</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddPatient</servlet-name>
+        <url-pattern>/addPatient</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DeletePatient</servlet-name>
+        <servlet-class>DeletePatient</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeletePatient</servlet-name>
+        <url-pattern>/deletePatient</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ShiftRoom</servlet-name>
+        <servlet-class>ShiftRoom</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ShiftRoom</servlet-name>
+        <url-pattern>/shiftRoom</url-pattern>
+    </servlet-mapping>
+
+</web-app>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>HL7 Hospital Way-Finding & Patient Tracker</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-black text-amber-50 min-h-screen">
+
+    <!-- top header -->
+    <header class="bg-black border-b border-amber-500 px-6 py-4 flex justify-between items-center">
+        <h1 class="text-xl font-semibold text-amber-400">Welcome to Nagpur City Hospital</h1>
+        <button id="staffOpenBtn" class="bg-amber-500 text-black px-3 py-1 rounded text-sm font-medium">Staff Login</button>
+    </header>
+
+    <!-- ================= DASHBOARD VIEW ================= -->
+    <div id="dashboardView" class="max-w-3xl mx-auto mt-8 p-6 bg-zinc-900 border border-amber-600/40 rounded shadow">
+        <h2 class="text-lg font-medium mb-4 text-amber-300">Search Patient</h2>
+
+        <div class="flex gap-2 mb-6">
+            <input id="searchBox" type="text" placeholder="Enter patient name"
+                class="bg-zinc-800 border border-amber-600/40 text-amber-50 rounded px-3 py-2 flex-1 placeholder-stone-400">
+            <button id="searchBtn" class="bg-amber-500 text-black font-medium px-4 py-2 rounded">Search</button>
+        </div>
+
+        <p id="searchMessage" class="text-sm text-stone-400 mb-2"></p>
+
+        <table class="w-full text-left border-collapse hidden" id="resultTable">
+            <thead>
+                <tr class="bg-zinc-800 text-amber-400">
+                    <th class="p-2">Name</th>
+                    <th class="p-2">Age</th>
+                    <th class="p-2">City</th>
+                    <th class="p-2">Ward</th>
+                    <th class="p-2">Action</th>
+                </tr>
+            </thead>
+            <tbody id="resultBody"></tbody>
+        </table>
+    </div>
+
+    <!-- ================= PATIENT DETAIL VIEW ================= -->
+    <div id="detailView" class="max-w-2xl mx-auto mt-8 p-6 bg-zinc-900 border border-amber-600/40 rounded shadow hidden">
+        <button id="backBtn" class="text-amber-400 mb-4">&larr; Back to Search</button>
+
+        <h2 class="text-lg font-medium mb-2 text-amber-300" id="detailName"></h2>
+        <p class="text-sm text-stone-400 mb-4" id="detailBasic"></p>
+
+        <div class="bg-zinc-800 border border-amber-600/40 rounded p-4 mb-4">
+            <h3 class="font-medium mb-1 text-amber-400">Room Location</h3>
+            <p id="detailRoom" class="text-stone-200"></p>
+            <span id="resyncBadge" class="hidden inline-block mt-2 bg-green-600 text-white text-xs px-2 py-1 rounded">
+                HL7 RE-SYNCED VIA MOCK ADT
+            </span>
+        </div>
+
+        <div class="bg-zinc-800 border border-amber-600/40 rounded p-4">
+            <div class="flex justify-between items-center mb-2">
+                <h3 class="font-medium text-amber-400">Route to Room</h3>
+                <div>
+                    <button id="langEnBtn" class="text-xs px-2 py-1 bg-amber-500 text-black rounded font-medium">English</button>
+                    <button id="langHiBtn" class="text-xs px-2 py-1 bg-zinc-700 text-amber-200 rounded">हिंदी</button>
+                </div>
+            </div>
+            <p id="detailRoute" class="text-stone-200"></p>
+        </div>
+    </div>
+
+    <!-- ================= STAFF LOGIN BOX ================= -->
+    <div id="staffLoginBox" class="max-w-sm mx-auto mt-8 p-6 bg-zinc-900 border border-amber-600/40 rounded shadow hidden">
+        <h2 class="text-lg font-medium mb-4 text-amber-300">Staff Login</h2>
+        <input id="staffName" type="text" placeholder="Staff Name"
+            class="bg-zinc-800 border border-amber-600/40 text-amber-50 rounded px-3 py-2 w-full mb-2 placeholder-stone-400">
+        <input id="staffId" type="text" placeholder="Staff ID"
+            class="bg-zinc-800 border border-amber-600/40 text-amber-50 rounded px-3 py-2 w-full mb-2 placeholder-stone-400">
+        <button id="staffLoginBtn" class="bg-amber-500 text-black font-medium px-4 py-2 rounded w-full">Login</button>
+        <p id="staffLoginMsg" class="text-sm text-red-400 mt-2"></p>
+    </div>
+
+    <!-- ================= STAFF PANEL ================= -->
+    <div id="staffPanel" class="max-w-3xl mx-auto mt-8 p-6 bg-zinc-900 border border-amber-600/40 rounded shadow hidden">
+        <h2 class="text-lg font-medium mb-4 text-amber-300">Staff Panel (Mock ADT Simulation)</h2>
+
+        <!-- add patient -->
+        <div class="mb-6">
+            <h3 class="font-medium mb-2 text-amber-400">Add Patient</h3>
+            <div class="grid grid-cols-2 gap-2 mb-2">
+                <input id="addName" type="text" placeholder="Name" class="bg-zinc-800 border border-amber-600/40 text-amber-50 rounded px-2 py-1 placeholder-stone-400">
+                <input id="addAge" type="number" placeholder="Age" class="bg-zinc-800 border border-amber-600/40 text-amber-50 rounded px-2 py-1 placeholder-stone-400">
+                <input id="addCity" type="text" placeholder="City" class="bg-zinc-800 border border-amber-600/40 text-amber-50 rounded px-2 py-1 placeholder-stone-400">
+                <select id="addWard" class="bg-zinc-800 border border-amber-600/40 text-amber-50 rounded px-2 py-1">
+                    <option>General Ward</option>
+                    <option>Emergency ICU</option>
+                    <option>Orthopedic Ward</option>
+                    <option>Maternity Ward</option>
+                    <option>Cardiology Ward</option>
+                </select>
+            </div>
+            <button id="addPatientBtn" class="bg-amber-500 text-black font-medium px-4 py-2 rounded">Add Patient</button>
+        </div>
+
+        <!-- patient list for shift / delete -->
+        <div>
+            <h3 class="font-medium mb-2 text-amber-400">All Patients</h3>
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="bg-zinc-800 text-amber-400">
+                        <th class="p-2">Name</th>
+                        <th class="p-2">Ward</th>
+                        <th class="p-2">Action</th>
+                    </tr>
+                </thead>
+                <tbody id="staffPatientBody"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- each file below handles one part, loaded in order -->
+    <script src="script-shared.js"></script>
+    <script src="script-search.js"></script>
+    <script src="script-detail.js"></script>
+    <script src="script-staff.js"></script>
+</body>
+</html>

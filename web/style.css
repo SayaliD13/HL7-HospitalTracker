@@ -1,0 +1,13 @@
+/* just a few small touches, most styling comes from Tailwind classes in the HTML */
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+table td, table th {
+    border-bottom: 1px solid #44403c;
+}
+
+button {
+    cursor: pointer;
+}
