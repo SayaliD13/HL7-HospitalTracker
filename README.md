@@ -22,6 +22,23 @@ Most patient locator projects stop at a simple search-and-display screen. This o
   - Simulate a live ADT room shift, which updates the patient's location instantly (no page reload) and logs the change in an audit table
 - Visitor screen re-syncs live and shows an "HL7 RE-SYNCED" badge when a shift happens while it is open
 
+## Screenshots
+
+**Patient detail - room and route (English)**
+![Patient Detail](PatientDetailCurrent.png)
+
+**Patient detail - Hindi route toggle**
+![Patient Detail Hindi](dashboard_2.png)
+
+**Live ADT shift - screen re-synced automatically**
+![Live Re-sync](PatientDetailUpdateLive.png)
+
+**Staff panel - add, delete, and simulate ADT shift**
+![Staff Panel](Staff.png)
+
+**MySQL database - patients table**
+![Database](sql.png)
+
 ## Key learnings
 
 - How HL7 messages carry patient location data, and how to parse a segment into usable fields
